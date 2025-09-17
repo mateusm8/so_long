@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/17 22:14:04 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:18:26 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int main()
 	void	*mlx;
 
 	mlx = mlx_init();
-	mlx_hook()
 	mlx_new_window(mlx, 1000, 1000, "MATEUS");
 	return (mlx_loop(mlx));
 }
