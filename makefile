@@ -6,7 +6,7 @@
 #    By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/17 20:09:45 by matmagal          #+#    #+#              #
-#    Updated: 2025/09/21 12:25:26 by matmagal         ###   ########.fr        #
+#    Updated: 2025/09/21 12:53:55 by matmagal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ else ifeq ($(UNAME_S),Darwin)
 endif
 
 SRCS = 	$(SRC_DIR)/so_long.c \
+		$(SRC_DIR)/get_next_line.c \
+		$(SRC_DIR)/get_next_line_utils.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 RM = rm -f
@@ -47,8 +49,13 @@ $(NAME): $(OBJS) $(PRINTF) $(MLX)
 $(PRINTF):
 	@$(MAKE) -s -C $(PRINTF_DIR)
 
+ifeq ($(UNAME_S),Linux)
 $(MLX):
 	@$(MAKE) -s -C $(MLX_DIR)
+else ifeq ($(UNAME_S),Darwin)
+$(MLX):
+	@echo "MLX Metal já pronta, nada a compilar"
+endif
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
