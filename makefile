@@ -6,7 +6,7 @@
 #    By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/17 20:09:45 by matmagal          #+#    #+#              #
-#    Updated: 2025/09/17 22:05:28 by matmagal         ###   ########.fr        #
+#    Updated: 2025/09/21 12:25:26 by matmagal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,20 @@ OBJ_DIR = obj
 INC_DIR = include
 PRINTF_DIR = ext/ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
-MLX_DIR = ext/minilibx-linux
+MLX_DIR = ext/minilibx
 MLX = $(MLX_DIR)/libmlx.a
-MLX_LIB	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+	MLX_DIR = ext/minilibx
+	MLX = $(MLX_DIR)/libmlx.a
+	MLX_LIB	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+else ifeq ($(UNAME_S),Darwin)
+	MLX_DIR = ext/minilibx
+	MLX = $(MLX_DIR)/libmlx.dylib
+	MLX_LIB	= -L$(MLX_DIR) -lmlx -framework Metal -framework MetalKit -framework AppKit
+endif
 
 SRCS = 	$(SRC_DIR)/so_long.c \
 
@@ -30,7 +41,7 @@ RM = rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(PRINTF)
+$(NAME): $(OBJS) $(PRINTF) $(MLX)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(PRINTF) -o $(NAME)
 	
 $(PRINTF):
@@ -53,7 +64,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@$(MAKE) -s -C $(PRINTF_DIR) fclean
-	@$(MAKE) -s -C $(MLX_DIR) fclean
+	@$(MAKE) -s -C $(MLX_DIR) clean
 
 re: fclean all
 
