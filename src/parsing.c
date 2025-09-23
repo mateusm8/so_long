@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:51:13 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/23 13:33:25 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:55:34 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,26 @@ int	map_height(char	*map)
 	}
 	close (fd);
 	return (height);
+}
+
+int	map_lenght(char *map)
+{
+	int		lenght;
+	int		fd;
+	char	*line;
+
+	fd = open (map, O_RDONLY);
+	line = get_next_line(fd);
+	if (!line)
+		return (close (fd), 0);
+	lenght = ft_strlen(line);
+	while (line)
+	{
+		if (lenght != ft_strlen(line))
+			return (close (fd), 0);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close (fd);
+	return (lenght);
 }
