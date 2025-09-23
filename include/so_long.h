@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/21 12:56:19 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:35:48 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@
 
 # include "mlx.h"
 # include "get_next_line.h"
+
+int	check_file(char *map_name, char *extension);
+int	map_height(int	fd);
 
 #endif
