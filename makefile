@@ -6,7 +6,7 @@
 #    By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/17 20:09:45 by matmagal          #+#    #+#              #
-#    Updated: 2025/09/21 12:53:55 by matmagal         ###   ########.fr        #
+#    Updated: 2025/09/24 20:44:12 by matmagal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ endif
 SRCS = 	$(SRC_DIR)/so_long.c \
 		$(SRC_DIR)/get_next_line.c \
 		$(SRC_DIR)/get_next_line_utils.c \
+		$(SRC_DIR)/parsing.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 RM = rm -f

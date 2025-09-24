@@ -6,15 +6,15 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:36:55 by matmagal          #+#    #+#             */
-/*   Updated: 2025/08/05 17:35:25 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:57:27 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+int	ft_strlen_gnl(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -44,7 +44,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*ptr;
 	char	*to_free;
 
-	newline = malloc(ft_strlen(s2) + ft_strlen(s1) + 1);
+	newline = malloc(ft_strlen_gnl(s2) + ft_strlen_gnl(s1) + 1);
 	if (!newline)
 	{
 		free(s1);

@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 14:31:39 by matmagal          #+#    #+#             */
-/*   Updated: 2025/08/05 17:20:12 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/24 22:55:14 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	*get_next_line(int fd);
 int		ft_check_nl(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_clean(char *buffer);
-size_t	ft_strlen(char *str);
+int		ft_strlen_gnl(char *str);
 
 #endif
