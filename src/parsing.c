@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:51:13 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/23 13:55:34 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/23 21:37:56 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	check_file(char *map_name, char *extension)
 	close (fd);
 	return (1);
 }
-int	map_height(char	*map)
+int	map_height(char	*file)
 {
 	int		height;
 	int		fd;
 	char	*line;
 
 	height = 0;
-	fd = open(map, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -53,13 +53,13 @@ int	map_height(char	*map)
 	return (height);
 }
 
-int	map_lenght(char *map)
+int	map_lenght(char *file)
 {
 	int		lenght;
 	int		fd;
 	char	*line;
 
-	fd = open (map, O_RDONLY);
+	fd = open (file, O_RDONLY);
 	line = get_next_line(fd);
 	if (!line)
 		return (close (fd), 0);
@@ -72,5 +72,5 @@ int	map_lenght(char *map)
 		line = get_next_line(fd);
 	}
 	close (fd);
-	return (lenght);
+	return (1);
 }
