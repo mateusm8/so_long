@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/26 18:42:39 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/26 22:23:58 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ typedef struct s_allst
 	t_pos		p_pos;
 }	t_allst;
 
-int	check_file(char *map_name, char *extension);
-int	map_height(char	*file);
-int	map_lenght(char *file);
+int		check_file(char *map_name, char *extension);
+int		map_height(char	*file);
+int		map_lenght(char *file);
+int		map_len(char *str);
+int		map_check(char **map, t_allst *all);
+int		line_check(char **map, char c);
+int		check_border(char **map, char *map_name);
+int		ft_strlen(char *str);
+int		check_border(char **map, char *map_name);
 char	**create_map(char *file);
-int	map_check(char **map, t_allst *all);
-int	line_check(char **map, char c);
-int	check_border(char **map, char *map_name);
 void	flood_fill(char **map, int x, int y, t_allst *all);
 void	find_player(char **map, t_allst *all);
 void	ft_free_str(char **str);

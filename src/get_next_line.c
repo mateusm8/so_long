@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:43:54 by matmagal          #+#    #+#             */
-/*   Updated: 2025/08/05 18:29:05 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/26 22:16:17 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		bytes_read;
 
-	if (fd < 0  || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (buffer[0] = 0, NULL);
 	line = NULL;
 	bytes_read = 1;
