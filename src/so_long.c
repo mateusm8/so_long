@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/24 22:19:57 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/26 18:45:35 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ char	**create_map(char *file)
 int main(int ac, char **av)
 {
 	char	**map;
+	char	**copy_map;
 	t_allst	*all;
+	int	i = 0;
 	
-
 	all = malloc(sizeof(t_allst));
 	all->map_info = (t_map_info){0, 0, 0, 1, 0};
+	all->p_pos = (t_pos){0, 0, 0, 0};
 
 	
 	map = NULL;
@@ -51,9 +53,27 @@ int main(int ac, char **av)
 		if (!check_file(av[1], ".ber") || !map_lenght(av[1]))
 			return (printf("Looks like something went wrong"), 0);
 		map = create_map(av[1]);
-		if (!map_check(map, all) || !check_border(map, av[1]))
+		if (!map_check(map, all))
 			return (printf("Invalid map\n"), 0);
+		if (!check_border(map, av[1]))
+			return (printf("Border error\n"), 0);
 		printf("Map created\n");
+		copy_map = create_map(av[1]);
+		find_player(copy_map, all);
+		printf("x = %d y = %d\n", all->p_pos.x, all->p_pos.y);
+		printf("\n");
+		flood_fill(copy_map, all->p_pos.x, all->p_pos.y, all);
+		i = 0;
+		while (copy_map[i])
+		{
+			printf("%s", copy_map[i]);
+			i++;
+		}
+		if (all->p_pos.c_count != all->map_info.collect || all->p_pos.e_check != 1)
+			return (printf("Algo correu mal\n"), 0);
+		else
+			printf("Flood fill ok\n");
+		ft_free_str(copy_map);
 	}
 	return (0);
 }
