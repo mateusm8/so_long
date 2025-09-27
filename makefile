@@ -6,7 +6,7 @@
 #    By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/17 20:09:45 by matmagal          #+#    #+#              #
-#    Updated: 2025/09/26 19:32:28 by matmagal         ###   ########.fr        #
+#    Updated: 2025/09/27 13:07:05 by matmagal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ ifeq ($(UNAME_S),Linux)
 	MLX = $(MLX_DIR)/libmlx.a
 	MLX_LIB = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 else ifeq ($(UNAME_S),Darwin)
-	MLX = $(MLX_DIR)/libmlx.dylib
 	MLX_LIB = -framework Metal -framework MetalKit -framework AppKit
 endif
 
@@ -34,24 +33,29 @@ SRCS = 	$(SRC_DIR)/so_long.c \
 		$(SRC_DIR)/get_next_line.c \
 		$(SRC_DIR)/get_next_line_utils.c \
 		$(SRC_DIR)/parsing.c \
-		$(SRC_DIR)/ft_free.c
+		$(SRC_DIR)/ft_free.c \
+		$(SRC_DIR)/utility_functions.c \
+		$(SRC_DIR)/utility_functions_2.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 RM = rm -f
 
 all: $(NAME)
 
+ifeq ($(UNAME_S),Linux)
 $(NAME): $(OBJS) $(PRINTF) $(MLX)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(PRINTF) -o $(NAME)
+else ifeq ($(UNAME_S),Darwin)
+$(NAME): $(OBJS) $(PRINTF)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(PRINTF) -o $(NAME)
+endif
 
 $(PRINTF):
 	@$(MAKE) -C $(PRINTF_DIR)
 
-$(MLX):
 ifeq ($(UNAME_S),Linux)
+$(MLX):
 	@$(MAKE) -C $(MLX_DIR)
-else
-	@echo "MLX Metal is ready!"
 endif
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
@@ -77,4 +81,3 @@ endif
 re: fclean all
 
 .PHONY: all clean fclean re
-

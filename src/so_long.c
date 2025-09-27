@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/26 22:18:35 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:31:05 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int main(int ac, char **av)
 		all->map_info = (t_map_info){0, 0, 0, 1, 0};
 		all->p_pos = (t_pos){0, 0, 0, 0};
 		map = NULL;
-		if (!check_file(av[1], ".ber") || !map_lenght(av[1]))
-			return (printf("Looks like something went wrong"), 0);
+		if (!check_file(av[1], ".ber"))
+			return (printf("Looks like something went wrong\n"), 0);
+		if (!map_lenght(av[1]))
+			return (printf("Wrong lenght\n"), 0);
 		map = create_map(av[1]);
 		if (!map_check(map, all))
 			return (printf("Invalid map\n"), 0);

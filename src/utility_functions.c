@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 22:19:43 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/26 22:21:33 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:15:12 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,43 +65,46 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	map_len(char *str)
+int	map_start(char *str)
 {
 	int	i;
-	int	j;
+	int	last_slash;
 
-	i = 0;
 	if (!str)
 		return (0);
+	i = 0;
+	last_slash = - 1;
 	while (str[i])
 	{
 		if (str[i] == '/')
-			j = i;
+			last_slash = i;
 		i++;
 	}
-	return (i - j - 1);
+	return (last_slash + 1);
 }
 
 int	check_file(char *map_name, char *extension)
 {
 	int	i;
-	int	j;
+	int	k;
+	int	start;
 	int	fd;
 
-	j = 0;
-	if (map_len(map_name) <= ft_strlen(extension))
+	k = 0;
+	start = map_start(map_name);
+	if (ft_strlen(map_name + start) <= ft_strlen(extension))
 		return (0);
-	i = map_len(map_name) - ft_strlen(extension);
+	i = start + ft_strlen(map_name + start) - ft_strlen(extension);
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	while (extension[j])
+	while (extension[k])
 	{
-		if (map_name[i + j] != extension[j])
+		if (map_name[i + k] != extension[k])
 			return (0);
-		j++;
+		k++;
 	}
-	if (map_name[i + j] != '\0')
+	if (map_name[i + k] != '\0' || extension[k] != '\0')
 		return (0);
 	close (fd);
 	return (1);
