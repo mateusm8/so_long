@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/30 22:12:38 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:06:57 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ char	**create_map(char *file)
 int	callback(int keycode, t_allst *all)
 {
 	if (keycode == KEY_ESC)
-	{
-		mlx_free(all);
-		exit (0);
-	}
+		close_window(all);
 	if (keycode == KEY_W || keycode == KEY_UP)
 		check_tile_y(all, all->p_pos.x, all->p_pos.y, -1);
 	if (keycode == KEY_S || keycode == KEY_DOWN)
@@ -63,7 +60,7 @@ void	check_tile_y(t_allst *all, int x, int y, int mv)
 		player_move_y(all, all->p_pos.x, all->p_pos.y, mv);
 	}
 	else if (all->map_info.map[y + mv][x] == 'E'
-			&& all->map_info.c_count == all->map_info.collect)
+			&& all->map_info.c_count == all->map_info.c_collect)
 		player_move_y(all, all->p_pos.x, all->p_pos.y, mv);
 }
 
@@ -77,7 +74,7 @@ void	check_tile_x(t_allst *all, int x, int y, int mv)
 		player_move_x(all, all->p_pos.x, all->p_pos.y, mv);
 	}
 	else if (all->map_info.map[y][x + mv] == 'E'
-		&& all->map_info.c_count == all->map_info.collect)
+		&& all->map_info.c_count == all->map_info.c_collect)
 		player_move_x(all, all->p_pos.x, all->p_pos.y, mv);
 }
 
@@ -127,7 +124,7 @@ int main(int ac, char **av)
 		if (!map_lenght(av[1]))
 			return (printf("Wrong lenght\n"), 0);
 		all = malloc(sizeof(t_allst));
-		all->map_info = (t_map_info){0, 0, 0, 1, 0, 0, map_height(av[1]), map_lenght(av[1]), NULL};
+		all->map_info = (t_map_info){0, 0, 0, 0, map_height(av[1]), map_lenght(av[1]), NULL};
 		all->p_pos = (t_pos){0, 0, 0, 0};
 		all->map_info.map = create_map(av[1]);
 		if (!map_check(all->map_info.map, all))
@@ -138,7 +135,7 @@ int main(int ac, char **av)
 		copy_map = create_map(av[1]);
 		find_player(all->map_info.map, all);
 		flood_fill(copy_map, all->p_pos.x, all->p_pos.y, all);
-		if (all->p_pos.c_count != all->map_info.collect
+		if (all->p_pos.c_count != all->map_info.c_collect
 			|| all->p_pos.e_check != 1)
 			return (free_all(all, all->map_info.map, copy_map), printf("Flood fill fail\n"), 0);
 		else

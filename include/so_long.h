@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/30 21:58:20 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:55:06 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@
 
 typedef struct	s_map_info
 {
-	int		player;
-	int		collect;
-	int		escape;
-	int		wall;
-	int		floor;
+	int		c_player;
+	int		c_collect;
+	int		c_escape;
 	int		c_count;
 	int		map_h;
 	int		map_l;
 	char	**map;
-}	t_map_info;
+}				t_map_info;
 
 typedef struct	s_pos
 {
@@ -54,15 +52,25 @@ typedef	struct	s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr;
 }	t_mlx;
 
-typedef struct s_allst
+typedef struct	s_imgs
+{
+	void	*wall;
+	void	*floor;
+	void	*player;
+	void	*exit;
+	void	*item;
+}				t_imgs;
+
+
+typedef struct	s_allst
 {
 	t_map_info	map_info;
 	t_pos		p_pos;
 	t_mlx		mlx;
-}	t_allst;
+	t_imgs		imgs;
+}				t_allst;
 
 int		check_file(char *map_name, char *extension);
 int		map_height(char	*file);

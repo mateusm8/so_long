@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:51:13 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/30 22:01:35 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:06:22 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	line_check(char **map, char c)
 
 int	map_check(char **map, t_allst *all)
 {
-	all->map_info.player = line_check(map, 'P');
-	all->map_info.collect += line_check(map, 'C');
-	all->map_info.escape += line_check(map, 'E');
-	if ((*all).map_info.player != 1 || (*all).map_info.collect < 1
-		|| (*all).map_info.escape != 1)
+	all->map_info.c_player = line_check(map, 'P');
+	all->map_info.c_collect += line_check(map, 'C');
+	all->map_info.c_escape += line_check(map, 'E');
+	if ((*all).map_info.c_player != 1 || (*all).map_info.c_collect < 1
+		|| (*all).map_info.c_escape != 1)
 		return (0);
 	return (1);
 }
