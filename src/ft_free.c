@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:47:06 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/01 16:23:17 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/03 00:56:29 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	mlx_free(t_allst *all)
 	if (all->mlx.win_ptr)
 		mlx_destroy_window(all->mlx.mlx_ptr, all->mlx.win_ptr);
 	free(all->mlx.mlx_ptr);
-	if (all->mlx.mlx_ptr)
-		mlx_destroy_display(all->mlx.mlx_ptr);
+	// if (all->mlx.mlx_ptr)
+	// 	mlx_destroy_display(all->mlx.mlx_ptr);
 	if (all->map_info.map)
 		ft_free_str(all->map_info.map);
 	if (all)

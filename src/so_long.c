@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/01 17:06:57 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/03 00:54:45 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	player_move_y(t_allst *all, int x, int y, int mv)
 	all->map_info.map[y][x] = '0';
 	all->map_info.map[y + mv][x] = 'P';
 	all->p_pos.y = y + mv;
-	// draw_map(all);
+	draw_map(all);
 }
 
 void	player_move_x(t_allst *all, int x, int y, int mv)
@@ -92,7 +92,7 @@ void	player_move_x(t_allst *all, int x, int y, int mv)
 	all->map_info.map[y][x] = '0';
 	all->map_info.map[y][x + mv] = 'P';
 	all->p_pos.x = x + mv;
-	// draw_map(all);
+	draw_map(all);
 }
 
 int	close_window(t_allst *all)
@@ -103,13 +103,131 @@ int	close_window(t_allst *all)
 
 void	init_screen(t_allst *all, int map_len, int	map_h)
 {
-	map_len *= 64;
-	map_h *= 64;
+	map_len *= TILE;
+	map_h *= TILE;
 	all->mlx.mlx_ptr = mlx_init();
+	all->imgs.exit_frame = 0;
 	all->mlx.win_ptr = mlx_new_window(all->mlx.mlx_ptr, map_len, map_h, "so_long");
 	mlx_hook(all->mlx.win_ptr, 2, 1L<<0, callback, all);
 	mlx_hook(all->mlx.win_ptr, 17, 0L, close_window, all);
+	draw_map(all);
+	mlx_loop_hook(all->mlx.mlx_ptr, animate_portal, all);
 	mlx_loop(all->mlx.mlx_ptr);
+}
+
+void	load_portal(t_allst *all, int w, int h)
+{
+	all->imgs.exit[0] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame1.xpm", &w, &h);
+	all->imgs.exit[1] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame2.xpm", &w, &h);
+	all->imgs.exit[2] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame3.xpm", &w, &h);
+	all->imgs.exit[3] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame4.xpm", &w, &h);
+	all->imgs.exit[4] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame5.xpm", &w, &h);
+	all->imgs.exit[5] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame6.xpm", &w, &h);
+	all->imgs.exit[6] = mlx_xpm_file_to_image(all->mlx.mlx_ptr,
+		"sprites/portal_frame7.xpm", &w, &h);
+	
+}
+
+void	load_map(t_allst *all)
+{
+	int w;
+	int h;
+
+	w = TILE;
+	h = TILE;
+	all->imgs.floor = mlx_xpm_file_to_image(all->mlx.mlx_ptr, "sprites/planks.xpm", &w, &h);
+	all->imgs.item = mlx_xpm_file_to_image(all->mlx.mlx_ptr, "sprites/potion.xpm", &w, &h);
+	all->imgs.wall = mlx_xpm_file_to_image(all->mlx.mlx_ptr, "sprites/bluebricks.xpm", &w, &h);
+	all->imgs.player = mlx_xpm_file_to_image(all->mlx.mlx_ptr, "sprites/whalkst.xpm", &w, &h);
+	load_portal(all, w, h);
+}
+char	map_run(t_allst *all, int y, int x)
+{
+	return (all->map_info.map[y][x]);
+}
+
+void	draw_floor(t_allst *all, int x, int y)
+{
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.floor, x, y);
+}
+
+void	draw_wall(t_allst *all, int x, int y)
+{
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.wall, x, y);
+}
+
+void	draw_player(t_allst *all, int x, int y)
+{
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.floor, x, y);
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.player, x, y);
+}
+
+void	draw_collect(t_allst *all, int x, int y)
+{
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.floor, x, y);
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.item, x, y);
+}
+
+void	draw_exit(t_allst *all, int x, int y)
+{
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.floor, x, y);
+	all->p_pos.exit_x = x;
+	all->p_pos.exit_y = y;
+}
+
+void	draw_map(t_allst *all)
+{
+	int	x;
+	int	y;
+	
+	y = 0;
+	while (y < all->map_info.map_h)
+	{
+		x = 0;
+		while (x < all->map_info.map_l)
+		{
+			if (map_run(all, y, x) == '1')
+				draw_wall(all, x, y);
+			else if (map_run(all, y, x) == '0')
+				draw_floor(all, x, y);
+			else if (map_run(all, y, x) == 'P')
+				draw_player(all, x, y);
+			else if (map_run(all, y, x) == 'C')
+				draw_collect(all, x, y);
+			else if (map_run(all, y, x) == 'E')
+				draw_exit(all, x, y);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	animate_portal(t_allst *all)
+{
+	int	x;
+	int	y;
+
+	x = all->p_pos.exit_x * TILE;
+	y = all->p_pos.exit_y * TILE;
+	mlx_put_image_to_window(all->mlx.mlx_ptr, all->mlx.win_ptr,
+		all->imgs.exit[all->imgs.exit_frame], x, y);
+	all->imgs.exit_frame++;
+	if (all->imgs.exit_frame > 6)
+		all->imgs.exit_frame = 0;
+	return (1);
 }
 
 int main(int ac, char **av)
@@ -125,7 +243,7 @@ int main(int ac, char **av)
 			return (printf("Wrong lenght\n"), 0);
 		all = malloc(sizeof(t_allst));
 		all->map_info = (t_map_info){0, 0, 0, 0, map_height(av[1]), map_lenght(av[1]), NULL};
-		all->p_pos = (t_pos){0, 0, 0, 0};
+		all->p_pos = (t_pos){0, 0, 0, 0, 0, 0};
 		all->map_info.map = create_map(av[1]);
 		if (!map_check(all->map_info.map, all))
 			return (free_all(all, all->map_info.map, 0), printf("Invalid map\n"), 0);

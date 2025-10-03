@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/01 17:55:06 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/03 00:54:57 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 
 # include "mlx.h"
 # include "get_next_line.h"
-# include "X11/X.h"
-# include "X11/keysym.h"
+
+# ifndef TILE
+#  define TILE 64
+# endif
 
 typedef struct	s_map_info
 {
@@ -46,6 +48,8 @@ typedef struct	s_pos
 	int	y;
 	int	c_count;
 	int	e_check;
+	int	exit_x;
+	int	exit_y;
 }				t_pos;
 
 typedef	struct	s_mlx
@@ -59,10 +63,10 @@ typedef struct	s_imgs
 	void	*wall;
 	void	*floor;
 	void	*player;
-	void	*exit;
 	void	*item;
+	void	*exit[7];
+	int		exit_frame;
 }				t_imgs;
-
 
 typedef struct	s_allst
 {
@@ -93,6 +97,16 @@ void	player_move_x(t_allst *all, int x, int y, int mv);
 void	player_move_y(t_allst *all, int x, int y, int mv);
 void	check_tile_x(t_allst *all, int x, int y, int mv);
 void	check_tile_y(t_allst *all, int x, int y, int mv);
+int		animate_portal(t_allst *all);
 int		callback(int keycode, t_allst *all);
+void	draw_map(t_allst *all);
+void	draw_exit(t_allst *all, int x, int y);
+void	draw_collect(t_allst *all, int x, int y);
+void	draw_player(t_allst *all, int x, int y);
+void	draw_wall(t_allst *all, int x, int y);
+void	draw_floor(t_allst *all, int x, int y);
+char	map_run(t_allst *all, int y, int x);
+void	load_map(t_allst *all);
+void	load_portal(t_allst *all, int w, int h);
 
 #endif
