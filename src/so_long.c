@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/03 00:54:45 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/04 00:54:19 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,15 +200,15 @@ void	draw_map(t_allst *all)
 		while (x < all->map_info.map_l)
 		{
 			if (map_run(all, y, x) == '1')
-				draw_wall(all, x, y);
+				draw_wall(all, x * TILE, y * TILE);
 			else if (map_run(all, y, x) == '0')
-				draw_floor(all, x, y);
+				draw_floor(all, x * TILE, y * TILE);
 			else if (map_run(all, y, x) == 'P')
-				draw_player(all, x, y);
+				draw_player(all, x * TILE, y * TILE);
 			else if (map_run(all, y, x) == 'C')
-				draw_collect(all, x, y);
+				draw_collect(all, x * TILE, y * TILE);
 			else if (map_run(all, y, x) == 'E')
-				draw_exit(all, x, y);
+				draw_exit(all, x * TILE, y * TILE);
 			x++;
 		}
 		y++;
@@ -259,6 +259,7 @@ int main(int ac, char **av)
 		else
 		{
 			printf("Flood fill ok\n");
+			printf("l = %d\nh = %d\n", all->map_info.map_h, all->map_info.map_l);
 			ft_free_str(copy_map);
 			init_screen(all, all->map_info.map_l, all->map_info.map_h);
 		}
