@@ -1,2 +1,0 @@
-mlx_hook
-draw_map
