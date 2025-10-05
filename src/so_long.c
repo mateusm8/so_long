@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/04 00:54:19 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:16:54 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	init_screen(t_allst *all, int map_len, int	map_h)
 	all->mlx.win_ptr = mlx_new_window(all->mlx.mlx_ptr, map_len, map_h, "so_long");
 	mlx_hook(all->mlx.win_ptr, 2, 1L<<0, callback, all);
 	mlx_hook(all->mlx.win_ptr, 17, 0L, close_window, all);
+	load_map(all);
 	draw_map(all);
 	mlx_loop_hook(all->mlx.mlx_ptr, animate_portal, all);
 	mlx_loop(all->mlx.mlx_ptr);
