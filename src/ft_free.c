@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:47:06 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 17:10:04 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:12:25 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	mlx_free(t_allst *all)
 	free_imgs(all);
 	if (all->mlx.win_ptr)
 		mlx_destroy_window(all->mlx.mlx_ptr, all->mlx.win_ptr);
-	free(all->mlx.mlx_ptr);
-	// if (all->mlx.mlx_ptr)
-	// 	mlx_destroy_display(all->mlx.mlx_ptr);
+	if (all->mlx.mlx_ptr)
+	 	mlx_destroy_display(all->mlx.mlx_ptr);
 	if (all->map_info.map)
 		ft_free_str(all->map_info.map);
-	if (all)
-		free(all);
+	if (all->p_pos.name)
+		free(all->p_pos.name);
+	free(all);
 }

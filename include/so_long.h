@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 15:33:41 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:58:39 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <string.h>
 
 # ifdef __linux__
 #  include "keys_linux.h"
@@ -50,6 +51,7 @@ typedef struct	s_pos
 	int	e_check;
 	int	exit_x;
 	int	exit_y;
+	char	*name;
 }				t_pos;
 
 typedef	struct	s_mlx

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 16:51:38 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:59:35 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	player_move_y(t_allst *all, int x, int y, int mv)
 	all->p_pos.y = y + mv;
 	draw_map(all);
 	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
-		exit (0);
+		close_window(all);
 }
 
 void	player_move_x(t_allst *all, int x, int y, int mv)
@@ -111,7 +111,7 @@ void	player_move_x(t_allst *all, int x, int y, int mv)
 	all->p_pos.x = x + mv;
 	draw_map(all);
 	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
-		exit (0);
+		 close_window(all);
 }
 
 int	close_window(t_allst *all)
@@ -126,7 +126,7 @@ void	init_screen(t_allst *all, int map_len, int	map_h)
 	map_h *= TILE;
 	all->mlx.mlx_ptr = mlx_init();
 	all->imgs.exit_frame = 0;
-	all->mlx.win_ptr = mlx_new_window(all->mlx.mlx_ptr, map_len, map_h, "so_long");
+	all->mlx.win_ptr = mlx_new_window(all->mlx.mlx_ptr, map_len, map_h, all->p_pos.name);
 	mlx_hook(all->mlx.win_ptr, 2, 1L<<0, callback, all);
 	mlx_hook(all->mlx.win_ptr, 17, 0L, close_window, all);
 	load_map(all);
@@ -257,7 +257,7 @@ int main(int ac, char **av)
 			return (printf("Wrong lenght\n"), 0);
 		all = malloc(sizeof(t_allst));
 		all->map_info = (t_map_info){0, 0, 0, 0, map_height(av[1]), map_lenght(av[1]), NULL};
-		all->p_pos = (t_pos){0, 0, 0, 0, 0, 0};
+		all->p_pos = (t_pos){0, 0, 0, 0, 0, 0, "so_long"};
 		all->map_info.map = create_map(av[1]);
 		if (!map_check(all->map_info.map, all))
 			return (free_all(all, all->map_info.map, 0), printf("Invalid map\n"), 0);
@@ -269,7 +269,10 @@ int main(int ac, char **av)
 		flood_fill(copy_map, all->p_pos.x, all->p_pos.y, all);
 		if (all->p_pos.c_count != all->map_info.c_collect
 			|| all->p_pos.e_check != 1)
+		{
+			printf("c_count = %d\nc_collect = %d\n e_check = %d\n", all->p_pos.c_count, all->map_info.c_collect, all->p_pos.e_check);
 			return (free_all(all, all->map_info.map, copy_map), printf("Flood fill fail\n"), 0);
+		}	
 		else
 		{
 			printf("Flood fill ok\n");
