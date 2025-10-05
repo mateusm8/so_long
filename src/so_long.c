@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 15:16:54 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:51:38 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	callback(int keycode, t_allst *all)
 
 void	check_tile_y(t_allst *all, int x, int y, int mv)
 {
+	if (all->map_info.map[all->p_pos.y][all->p_pos.x] == 'E')
+		exit (0);
 	if (all->map_info.map[y + mv][x] == '0')
 		player_move_y(all, all->p_pos.x, all->p_pos.y, mv);
 	else if (all->map_info.map[y + mv][x] == 'C')
@@ -66,6 +68,8 @@ void	check_tile_y(t_allst *all, int x, int y, int mv)
 
 void	check_tile_x(t_allst *all, int x, int y, int mv)
 {
+	if (all->map_info.map[all->p_pos.y][all->p_pos.x] == 'E')
+		exit (0);
 	if (all->map_info.map[y][x + mv] == '0')
 		player_move_x(all, all->p_pos.x, all->p_pos.y, mv);
 	else if (all->map_info.map[y][x + mv] == 'C')
@@ -80,19 +84,34 @@ void	check_tile_x(t_allst *all, int x, int y, int mv)
 
 void	player_move_y(t_allst *all, int x, int y, int mv)
 {
+	char	next;
 
+	next = all->map_info.map[y][x];
+	if (next == 'C')
+		all->map_info.c_count++;
+	if (next != 'E')
+		all->map_info.map[y + mv][x] = 'P';	
 	all->map_info.map[y][x] = '0';
-	all->map_info.map[y + mv][x] = 'P';
 	all->p_pos.y = y + mv;
 	draw_map(all);
+	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
+		exit (0);
 }
 
 void	player_move_x(t_allst *all, int x, int y, int mv)
 {
+	char	next;
+
+	next = all->map_info.map[y][x];
+	if (next == 'C')
+		all->map_info.c_count++;
+	if (next != 'E')
+		all->map_info.map[y][x + mv] = 'P';
 	all->map_info.map[y][x] = '0';
-	all->map_info.map[y][x + mv] = 'P';
 	all->p_pos.x = x + mv;
 	draw_map(all);
+	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
+		exit (0);
 }
 
 int	close_window(t_allst *all)
@@ -167,26 +186,16 @@ void	draw_wall(t_allst *all, int x, int y)
 
 void	draw_player(t_allst *all, int x, int y)
 {
-	mlx_put_image_to_window(all->mlx.mlx_ptr,
-		all->mlx.win_ptr, all->imgs.floor, x, y);
+	draw_floor(all, x, y);
 	mlx_put_image_to_window(all->mlx.mlx_ptr,
 		all->mlx.win_ptr, all->imgs.player, x, y);
 }
 
 void	draw_collect(t_allst *all, int x, int y)
 {
-	mlx_put_image_to_window(all->mlx.mlx_ptr,
-		all->mlx.win_ptr, all->imgs.floor, x, y);
+	draw_floor(all, x, y);
 	mlx_put_image_to_window(all->mlx.mlx_ptr,
 		all->mlx.win_ptr, all->imgs.item, x, y);
-}
-
-void	draw_exit(t_allst *all, int x, int y)
-{
-	mlx_put_image_to_window(all->mlx.mlx_ptr,
-		all->mlx.win_ptr, all->imgs.floor, x, y);
-	all->p_pos.exit_x = x;
-	all->p_pos.exit_y = y;
 }
 
 void	draw_map(t_allst *all)
@@ -209,7 +218,10 @@ void	draw_map(t_allst *all)
 			else if (map_run(all, y, x) == 'C')
 				draw_collect(all, x * TILE, y * TILE);
 			else if (map_run(all, y, x) == 'E')
-				draw_exit(all, x * TILE, y * TILE);
+			{
+				all->p_pos.exit_x = x;
+				all->p_pos.exit_y = y;
+			}
 			x++;
 		}
 		y++;
@@ -223,6 +235,7 @@ int	animate_portal(t_allst *all)
 
 	x = all->p_pos.exit_x * TILE;
 	y = all->p_pos.exit_y * TILE;
+	draw_floor(all, x, y);
 	mlx_put_image_to_window(all->mlx.mlx_ptr, all->mlx.win_ptr,
 		all->imgs.exit[all->imgs.exit_frame], x, y);
 	all->imgs.exit_frame++;

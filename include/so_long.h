@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/03 00:54:57 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:33:41 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	check_tile_y(t_allst *all, int x, int y, int mv);
 int		animate_portal(t_allst *all);
 int		callback(int keycode, t_allst *all);
 void	draw_map(t_allst *all);
-void	draw_exit(t_allst *all, int x, int y);
 void	draw_collect(t_allst *all, int x, int y);
 void	draw_player(t_allst *all, int x, int y);
 void	draw_wall(t_allst *all, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:47:06 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/03 00:56:29 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:10:04 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,30 @@ void	free_all(t_allst *all, char **map, char **copy_map)
 		free(all);
 }
 
+void	free_imgs(t_allst *all)
+{
+	int	i;
+
+	i = 0;
+	if (all->imgs.wall)
+		mlx_destroy_image(all->mlx.mlx_ptr, all->imgs.wall);
+	if (all->imgs.player)
+		mlx_destroy_image(all->mlx.mlx_ptr, all->imgs.player);
+	if (all->imgs.item)
+		mlx_destroy_image(all->mlx.mlx_ptr, all->imgs.item);
+	if (all->imgs.floor)
+		mlx_destroy_image(all->mlx.mlx_ptr, all->imgs.floor);
+	while (i <= 6)
+	{
+		if (all->imgs.exit[i])
+			mlx_destroy_image(all->mlx.mlx_ptr, all->imgs.exit[i]);
+		i++;
+	}
+}
+
 void	mlx_free(t_allst *all)
 {
+	free_imgs(all);
 	if (all->mlx.win_ptr)
 		mlx_destroy_window(all->mlx.mlx_ptr, all->mlx.win_ptr);
 	free(all->mlx.mlx_ptr);
