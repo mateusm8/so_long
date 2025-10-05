@@ -6,7 +6,7 @@
 /*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 16:59:35 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/05 22:45:02 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,9 +230,13 @@ void	draw_map(t_allst *all)
 
 int	animate_portal(t_allst *all)
 {
-	int	x;
-	int	y;
+	int					x;
+	int					y;
+	static long long	frame_counter;
 
+	frame_counter++;
+	if (frame_counter % 600 != 0)
+		return (0);
 	x = all->p_pos.exit_x * TILE;
 	y = all->p_pos.exit_y * TILE;
 	draw_floor(all, x, y);
