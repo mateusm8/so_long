@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 17:00:39 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:06:08 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	free_all(t_allst *all, char **map, char **copy_map);
 void	mlx_free(t_allst *all);
 void	init_screen(t_allst *all, int map_len, int	map_h);
 int		close_window(t_allst *all);
+void	free_imgs(t_allst *all);
 void	player_move_x(t_allst *all, int x, int y, int mv);
 void	player_move_y(t_allst *all, int x, int y, int mv);
 void	check_tile_x(t_allst *all, int x, int y, int mv);
