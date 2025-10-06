@@ -6,7 +6,7 @@
 #    By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/17 20:09:45 by matmagal          #+#    #+#              #
-#    Updated: 2025/10/03 23:43:53 by matmagal         ###   ########.fr        #
+#    Updated: 2025/10/06 17:02:59 by matmagal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,10 @@ SRCS = 	$(SRC_DIR)/so_long.c \
 		$(SRC_DIR)/ft_free.c \
 		$(SRC_DIR)/utility_functions.c \
 		$(SRC_DIR)/utility_functions_2.c \
+		$(SRC_DIR)/check_tile_and_move.c \
+		$(SRC_DIR)/draw_func.c \
+		$(SRC_DIR)/portal_func.c \
+		$(SRC_DIR)/transparency.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 RM = rm -f

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 01:28:06 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/06 17:00:39 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	check_tile_x(t_allst *all, int x, int y, int mv);
 void	check_tile_y(t_allst *all, int x, int y, int mv);
 int		animate_portal(t_allst *all);
 int		callback(int keycode, t_allst *all);
-void	draw_map(t_allst *all);
+void	draw_map(t_allst *all, int x, int y);
 void	draw_collect(t_allst *all, int x, int y);
 void	draw_player(t_allst *all, int x, int y);
 void	draw_wall(t_allst *all, int x, int y);
