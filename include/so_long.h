@@ -6,7 +6,7 @@
 /*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 16:58:39 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/06 01:28:06 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,22 @@ typedef struct	s_imgs
 	int		exit_frame;
 }				t_imgs;
 
+typedef struct s_str
+{
+	char	*floor;
+	char	*item;
+	char	*player;
+	char	**exit;
+}				t_str;
+
+
 typedef struct	s_allst
 {
 	t_map_info	map_info;
 	t_pos		p_pos;
 	t_mlx		mlx;
 	t_imgs		imgs;
+	t_str		strs;
 }				t_allst;
 
 int		check_file(char *map_name, char *extension);
@@ -109,5 +119,10 @@ void	draw_floor(t_allst *all, int x, int y);
 char	map_run(t_allst *all, int y, int x);
 void	load_map(t_allst *all);
 void	load_portal(t_allst *all, int w, int h);
+void	fill_strs(t_allst *all);
+void	player_sprite_check(t_allst *all);
+void	item_sprite_check(t_allst *all);
+void	exit_sprite_check(t_allst *all);
+
 
 #endif

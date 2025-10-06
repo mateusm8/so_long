@@ -6,7 +6,7 @@
 /*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/05 22:45:02 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/06 01:39:53 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,96 @@ char	**create_map(char *file)
 	map[i] = NULL;
 	close(fd);
 	return (map);
+}
+
+void	fill_strs(t_allst *all)
+{
+	int	bit;
+	int	size;
+	int	edian;
+	int	i;
+
+	bit = 0;
+	size = 0;
+	edian = 0;
+	i = 0;
+	all->strs.player = mlx_get_data_addr(all->imgs.player, &bit, &size, &edian);
+	all->strs.item = mlx_get_data_addr(all->imgs.item, &bit, &size, &edian);
+	all->strs.floor = mlx_get_data_addr(all->imgs.floor, &bit, &size, &edian);
+	all->strs.exit = malloc(sizeof(int *) * 7);
+	if (!all->strs.exit)
+		return ;
+	while (i <= 6)
+	{
+		all->strs.exit[i] = mlx_get_data_addr(all->imgs.exit[i], &bit, &size, &edian);
+		i++;
+	}
+	player_sprite_check(all);
+	item_sprite_check(all);
+	exit_sprite_check(all);
+}
+
+void	player_sprite_check(t_allst *all)
+{
+	int	i;
+	int	total_pixel;
+	int	*p_data;
+	int	*f_data;
+
+	i = 0;
+	total_pixel = TILE * TILE;
+	p_data = (int *)all->strs.player;
+	f_data = (int *)all->strs.floor;
+	while (i < total_pixel)
+	{
+		if (p_data[i] == 0)
+			p_data[i] = f_data[i];
+		i++;
+	}
+}
+
+void	item_sprite_check(t_allst *all)
+{
+	int	i;
+	int	total_pixel;
+	int	*i_data;
+	int	*f_data;
+
+	i = 0;
+	total_pixel = TILE * TILE;
+	i_data = (int *)all->strs.item;
+	f_data = (int *)all->strs.floor;
+	while (i < total_pixel)
+	{
+		if (i_data[i] == 0)
+			i_data[i] = f_data[i];
+		i++;
+	}
+}
+
+void	exit_sprite_check(t_allst *all)
+{
+	int	i;
+	int	j;
+	int	total_pixel;
+	int	*e_data;
+	int	*f_data;
+
+	total_pixel = TILE * TILE;
+	i = 0;
+	f_data = (int *)all->strs.floor;
+	while (i < 7)
+	{
+		e_data = (int *)all->strs.exit[i];
+		j = 0;
+		while (j < total_pixel)
+		{
+			if (e_data[j] == 0)
+				e_data[j] = f_data[j];
+			j++;
+		}
+		i++;
+	}
 }
 
 int	callback(int keycode, t_allst *all)
@@ -130,6 +220,7 @@ void	init_screen(t_allst *all, int map_len, int	map_h)
 	mlx_hook(all->mlx.win_ptr, 2, 1L<<0, callback, all);
 	mlx_hook(all->mlx.win_ptr, 17, 0L, close_window, all);
 	load_map(all);
+	fill_strs(all);
 	draw_map(all);
 	mlx_loop_hook(all->mlx.mlx_ptr, animate_portal, all);
 	mlx_loop(all->mlx.mlx_ptr);
@@ -240,8 +331,8 @@ int	animate_portal(t_allst *all)
 	x = all->p_pos.exit_x * TILE;
 	y = all->p_pos.exit_y * TILE;
 	draw_floor(all, x, y);
-	mlx_put_image_to_window(all->mlx.mlx_ptr, all->mlx.win_ptr,
-		all->imgs.exit[all->imgs.exit_frame], x, y);
+	mlx_put_image_to_window(all->mlx.mlx_ptr,
+		all->mlx.win_ptr, all->imgs.exit[all->imgs.exit_frame], x, y);
 	all->imgs.exit_frame++;
 	if (all->imgs.exit_frame > 6)
 		all->imgs.exit_frame = 0;
