@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:56:20 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 16:57:12 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:04:26 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	player_move_y(t_allst *all, int x, int y, int mv)
 		all->map_info.map[y + mv][x] = 'P';	
 	all->map_info.map[y][x] = '0';
 	all->p_pos.y = y + mv;
-	draw_map(all);
+	draw_map(all, 0, 0);
 	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
 		close_window(all);
 }
@@ -86,7 +86,7 @@ void	player_move_x(t_allst *all, int x, int y, int mv)
 		all->map_info.map[y][x + mv] = 'P';
 	all->map_info.map[y][x] = '0';
 	all->p_pos.x = x + mv;
-	draw_map(all);
+	draw_map(all, 0, 0);
 	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
 		 close_window(all);
 }
