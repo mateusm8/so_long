@@ -6,7 +6,7 @@
 /*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 01:39:53 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/06 15:47:26 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	player_sprite_check(t_allst *all)
 	f_data = (int *)all->strs.floor;
 	while (i < total_pixel)
 	{
-		if (p_data[i] == 0)
+		if (p_data[i] == (int)0xff000000)
 			p_data[i] = f_data[i];
 		i++;
 	}
@@ -94,7 +94,7 @@ void	item_sprite_check(t_allst *all)
 	f_data = (int *)all->strs.floor;
 	while (i < total_pixel)
 	{
-		if (i_data[i] == 0)
+		if (i_data[i] == (int)0xff000000)
 			i_data[i] = f_data[i];
 		i++;
 	}
@@ -117,7 +117,7 @@ void	exit_sprite_check(t_allst *all)
 		j = 0;
 		while (j < total_pixel)
 		{
-			if (e_data[j] == 0)
+			if (e_data[j] == (int)0xff000000)
 				e_data[j] = f_data[j];
 			j++;
 		}
