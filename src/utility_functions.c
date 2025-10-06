@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 22:19:43 by matmagal          #+#    #+#             */
-/*   Updated: 2025/09/27 13:15:12 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/06 22:51:11 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	map_lenght(char *file)
 	while (line)
 	{
 		if (lenght != ft_strlen(line))
-			return (close (fd), 0);
+			return (free(line), close (fd), 0);
 		free(line);
 		line = get_next_line(fd);
 	}

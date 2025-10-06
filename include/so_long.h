@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 17:06:08 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/06 23:02:20 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # include "mlx.h"
 # include "get_next_line.h"
+# include "ft_printf.h"
 
 # ifndef TILE
 #  define TILE 64
@@ -51,6 +52,7 @@ typedef struct	s_pos
 	int	e_check;
 	int	exit_x;
 	int	exit_y;
+	int	move_count;
 	char	*name;
 }				t_pos;
 
@@ -124,6 +126,8 @@ void	fill_strs(t_allst *all);
 void	player_sprite_check(t_allst *all);
 void	item_sprite_check(t_allst *all);
 void	exit_sprite_check(t_allst *all);
-
+void	parse_three(t_allst *all, char **av);
+void	parse_two(t_allst *all, char **av);
+void	parse_one(char **av);
 
 #endif

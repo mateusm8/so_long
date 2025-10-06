@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tile_and_move.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:56:20 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 17:04:26 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/06 23:04:30 by mateus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	player_move_y(t_allst *all, int x, int y, int mv)
 {
 	char	next;
 
+	all->p_pos.move_count++;
+	ft_printf("Moves: %d\n", all->p_pos.move_count);
 	next = all->map_info.map[y][x];
 	if (next == 'C')
 		all->map_info.c_count++;
@@ -79,6 +81,8 @@ void	player_move_x(t_allst *all, int x, int y, int mv)
 {
 	char	next;
 
+	all->p_pos.move_count++;
+	ft_printf("Moves: %d\n", all->p_pos.move_count);
 	next = all->map_info.map[y][x];
 	if (next == 'C')
 		all->map_info.c_count++;
