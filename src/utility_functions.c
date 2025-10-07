@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 22:19:43 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 22:51:11 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/07 20:57:06 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	map_start(char *str)
 	if (!str)
 		return (0);
 	i = 0;
-	last_slash = - 1;
+	last_slash = -1;
 	while (str[i])
 	{
 		if (str[i] == '/')

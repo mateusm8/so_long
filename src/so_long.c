@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:46:21 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 23:02:29 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/07 20:56:08 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	parse_three(t_allst *all, char **av)
 	copy_map = create_map(av[1]);
 	flood_fill(copy_map, all->p_pos.x, all->p_pos.y, all);
 	if (all->p_pos.c_count != all->map_info.c_collect
-	|| all->p_pos.e_check != 1)
+		|| all->p_pos.e_check != 1)
 	{
 		free_all(all, all->map_info.map, copy_map);
 		ft_printf("Flood fill fail\n");
@@ -58,7 +58,7 @@ void	parse_three(t_allst *all, char **av)
 	ft_free_str(copy_map);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_allst	*all;
 

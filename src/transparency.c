@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:54:02 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 16:55:03 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/07 20:56:41 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	fill_strs(t_allst *all)
 		return ;
 	while (i <= 6)
 	{
-		all->strs.exit[i] = mlx_get_data_addr(all->imgs.exit[i], &bit, &size, &edian);
+		all->strs.exit[i] = mlx_get_data_addr(all->imgs.exit[i],
+				&bit, &size, &edian);
 		i++;
 	}
 	player_sprite_check(all);

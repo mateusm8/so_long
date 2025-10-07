@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tile_and_move.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:56:20 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 23:04:30 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/07 20:54:11 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	player_move_y(t_allst *all, int x, int y, int mv)
 	if (next == 'C')
 		all->map_info.c_count++;
 	if (next != 'E')
-		all->map_info.map[y + mv][x] = 'P';	
+		all->map_info.map[y + mv][x] = 'P';
 	all->map_info.map[y][x] = '0';
 	all->p_pos.y = y + mv;
 	draw_map(all, 0, 0);
@@ -92,5 +92,5 @@ void	player_move_x(t_allst *all, int x, int y, int mv)
 	all->p_pos.x = x + mv;
 	draw_map(all, 0, 0);
 	if (all->p_pos.x == all->p_pos.exit_x && all->p_pos.y == all->p_pos.exit_y)
-		 close_window(all);
+		close_window(all);
 }
