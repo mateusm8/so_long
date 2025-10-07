@@ -6,7 +6,7 @@
 #    By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/17 20:09:45 by matmagal          #+#    #+#              #
-#    Updated: 2025/10/06 17:02:59 by matmagal         ###   ########.fr        #
+#    Updated: 2025/10/07 21:49:58 by matmagal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS = 	$(SRC_DIR)/so_long.c \
 		$(SRC_DIR)/draw_func.c \
 		$(SRC_DIR)/portal_func.c \
 		$(SRC_DIR)/transparency.c \
+		$(SRC_DIR)/flood_fill.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 RM = rm -f

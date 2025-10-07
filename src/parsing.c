@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:51:13 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/01 17:06:22 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/07 21:52:27 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,4 @@ void	find_player(char **map, t_allst *all)
 		}
 		y++;
 	}
-}
-
-void	flood_fill(char **map, int x, int y, t_allst *all)
-{
-	if (map[y][x] == '1' || map[y][x] == 'X')
-		return ;
-	if (map[y][x] == 'C')
-		all->p_pos.c_count += 1;
-	if (map[y][x] == 'E')
-		all->p_pos.e_check = 1;
-	map[y][x] = 'X';
-	flood_fill(map, x, y + 1, all);
-	flood_fill(map, x, y - 1, all);
-	flood_fill(map, x + 1, y, all);
-	flood_fill(map, x - 1, y, all);
 }

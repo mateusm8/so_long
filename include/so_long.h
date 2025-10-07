@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateus <mateus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:12:05 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/06 23:02:20 by mateus           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:51:39 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ typedef struct s_str
 	char	**exit;
 }				t_str;
 
+typedef struct 	s_t2
+{
+	int	ffwe;
+}				t_t2;
+
 
 typedef struct	s_allst
 {
@@ -88,6 +93,7 @@ typedef struct	s_allst
 	t_mlx		mlx;
 	t_imgs		imgs;
 	t_str		strs;
+	t_t2		ffwe;
 }				t_allst;
 
 int		check_file(char *map_name, char *extension);
@@ -129,5 +135,6 @@ void	exit_sprite_check(t_allst *all);
 void	parse_three(t_allst *all, char **av);
 void	parse_two(t_allst *all, char **av);
 void	parse_one(char **av);
+void	flood_fill_exit_wall(char **map, int x, int y, t_allst *all);
 
 #endif
