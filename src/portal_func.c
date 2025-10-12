@@ -6,7 +6,7 @@
 /*   By: matmagal <matmagal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:58:03 by matmagal          #+#    #+#             */
-/*   Updated: 2025/10/07 20:55:00 by matmagal         ###   ########.fr       */
+/*   Updated: 2025/10/08 22:07:31 by matmagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	animate_portal(t_allst *all)
 	static long long	frame_counter;
 
 	frame_counter++;
-	if (frame_counter % 600 != 0)
+	if (frame_counter % 1600 != 0)
 		return (0);
 	x = all->p_pos.exit_x * TILE;
 	y = all->p_pos.exit_y * TILE;
